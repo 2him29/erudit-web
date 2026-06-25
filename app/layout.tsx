@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Newsreader, DM_Mono, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
   display: "swap",
+  style: ["normal", "italic"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500"],
+});
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
   display: "swap",
 });
@@ -26,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${playfair.variable} ${inter.variable}`}
+      className={`${newsreader.variable} ${dmMono.variable} ${hanken.variable}`}
     >
-      <body className="bg-espresso text-cream antialiased overflow-x-hidden">
+      <body className="bg-cream text-olive antialiased overflow-x-hidden font-sans">
         {children}
       </body>
     </html>

@@ -1,127 +1,118 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
-
-function IconInstagram() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-    </svg>
-  )
-}
-
-function IconFacebook() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-    </svg>
-  )
-}
-
 export default function Footer() {
   return (
-    <footer className="bg-espresso border-t border-divider">
-      {/* Top section */}
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-
-          {/* Brand column */}
-          <div className="lg:col-span-2">
-            <div className="relative h-12 w-32 mb-6">
-              <Image
-                src="/logo.png"
-                alt="Érudit Connect Lounge"
-                fill
-                sizes="128px"
-                className="object-contain object-left"
-              />
+    <footer style={{ background: '#2E301B', color: '#CFC8B2', padding: 'clamp(54px, 8vh, 84px) 0 0' }}>
+      <div className="mx-auto" style={{ maxWidth: '1200px', padding: '0 clamp(20px, 5vw, 64px)' }}>
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '40px',
+            paddingBottom: 'clamp(40px, 6vh, 60px)',
+          }}
+        >
+          {/* Brand */}
+          <div style={{ gridColumn: '1 / -1', maxWidth: '360px' }}>
+            <div
+              className="font-serif"
+              style={{ fontSize: '30px', letterSpacing: '.2em', color: '#F2EBDD', marginBottom: '18px' }}
+            >
+              ÉRUDIT
             </div>
-            <p className="text-walnut text-sm leading-relaxed max-w-xs mb-7">
-              Un espace pensé pour savourer, connecter et créer.
+            <p style={{ fontSize: '14.5px', lineHeight: '1.7', color: '#A8A189', marginBottom: '18px' }}>
+              Un espace pensé pour savourer, se connecter et créer.
               Au cœur d&rsquo;Alger, votre havre de paix.
             </p>
-
-            {/* Tagline */}
-            <p className="font-serif text-gold/70 italic text-base mb-8">
-              &ldquo;Savourer · Connecter · Créer&rdquo;
+            <p
+              className="font-serif italic"
+              style={{ fontSize: '17px', color: '#BF6A3F', marginBottom: '22px' }}
+            >
+              Savourer · Connecter · Créer
             </p>
-
-            {/* Social */}
-            <div className="flex gap-3">
+            <div className="flex" style={{ gap: '12px' }}>
               {[
-                { href: 'https://instagram.com/erudit_connect_lounge', icon: IconInstagram, label: 'Instagram' },
-                { href: 'https://facebook.com', icon: IconFacebook, label: 'Facebook' },
-              ].map(({ href, icon: Icon, label }) => (
+                { href: 'https://instagram.com/erudit_connect_lounge', label: 'IG' },
+                { href: 'https://facebook.com', label: 'FB' },
+              ].map(({ href, label }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-full border border-divider hover:border-gold/60 flex items-center justify-center text-walnut hover:text-gold transition-all duration-300 hover:bg-gold/5"
+                  className="font-mono flex items-center justify-center transition-colors hover:bg-[rgba(207,200,178,.1)]"
+                  style={{
+                    width: '42px', height: '42px',
+                    borderRadius: '100px',
+                    border: '1px solid rgba(207,200,178,.3)',
+                    color: '#CFC8B2',
+                    textDecoration: 'none',
+                    fontSize: '11px',
+                    letterSpacing: '.05em',
+                  }}
                 >
-                  <Icon />
+                  {label}
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Hours */}
+          {/* Horaires */}
           <div>
-            <h3 className="text-cream text-[11px] font-semibold tracking-[0.25em] uppercase mb-6">
+            <h3
+              className="font-mono uppercase"
+              style={{ fontSize: '11px', letterSpacing: '.22em', color: '#F2EBDD', marginBottom: '18px' }}
+            >
               Horaires
             </h3>
-            <div className="flex items-start gap-3">
-              <Clock size={13} className="text-gold mt-0.5 shrink-0" />
-              <div className="text-sm space-y-1">
-                <div className="text-cream">Samedi – Jeudi</div>
-                <div className="text-gold font-semibold">08h00 – 18h00</div>
-                <div className="text-walnut text-xs pt-1">Vendredi : Fermé</div>
-              </div>
+            <div style={{ fontSize: '14px', lineHeight: '1.9', color: '#A8A189' }}>
+              <div style={{ color: '#CFC8B2' }}>Samedi – Jeudi</div>
+              <div style={{ color: '#BF6A3F' }}>08h00 – 18h00</div>
+              <div style={{ marginTop: '6px' }}>Vendredi : fermé</div>
             </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-cream text-[11px] font-semibold tracking-[0.25em] uppercase mb-6">
+            <h3
+              className="font-mono uppercase"
+              style={{ fontSize: '11px', letterSpacing: '.22em', color: '#F2EBDD', marginBottom: '18px' }}
+            >
               Contact
             </h3>
-            <ul className="space-y-3.5">
+            <div className="flex flex-col" style={{ gap: '10px', fontSize: '14px' }}>
               {[
-                { href: 'tel:0555959599', icon: Phone, label: '0555 95 95 99' },
-                { href: 'mailto:coffeshoperudit@gmail.com', icon: Mail, label: 'coffeshoperudit@gmail.com' },
-                {
-                  href: 'https://maps.google.com/?q=36.7433,3.0406',
-                  icon: MapPin,
-                  label: 'Alger, Algérie',
-                  external: true,
-                },
-              ].map(({ href, icon: Icon, label, external }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-3 text-walnut hover:text-gold text-sm transition-colors duration-300 group"
-                  >
-                    <Icon size={13} className="text-gold/60 group-hover:text-gold transition-colors shrink-0" />
-                    <span className="truncate">{label}</span>
-                  </a>
-                </li>
+                { href: 'tel:0555959599', label: '0555 95 95 99' },
+                { href: 'mailto:coffeshoperudit@gmail.com', label: 'coffeshoperudit@gmail.com' },
+                { href: 'https://maps.google.com/?q=36.7433,3.0406', label: 'Alger, Algérie', external: true },
+              ].map(({ href, label, external }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  className="transition-colors hover:text-[#F2EBDD]"
+                  style={{ color: '#A8A189', textDecoration: 'none' }}
+                >
+                  {label}
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
-
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-divider">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-walnut/50 text-xs">
-          <span>© 2025 Érudit Connect Lounge. Tous droits réservés.</span>
-          <span>Alger, Algérie</span>
+        {/* Bottom bar */}
+        <div
+          className="flex flex-wrap items-center justify-between font-mono"
+          style={{
+            borderTop: '1px solid rgba(207,200,178,.16)',
+            padding: '22px 0',
+            gap: '8px',
+            fontSize: '11px',
+            letterSpacing: '.08em',
+            color: '#7E785F',
+          }}
+        >
+          <span>© 2026 Érudit Coffee Shop · Tous droits réservés</span>
+          <span>Alger · Algérie</span>
         </div>
       </div>
     </footer>

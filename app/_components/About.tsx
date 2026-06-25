@@ -1,66 +1,87 @@
 'use client'
 
-import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const STATS = [
-  { value: '5★',     label: 'sur Google' },
-  { value: '5×',     label: 'visite moy.' },
-  { value: 'Sam–Jeu', label: '8h – 18h' },
+  { value: '4.9', label: 'note Google' },
+  { value: '5×',  label: 'on y revient' },
+  { value: '8–18h', label: 'Sam au Jeu' },
 ]
 
 export default function About() {
-  const ref = useRef<HTMLElement>(null)
-
   return (
-    <section ref={ref} id="about" className="py-36 md:py-48 bg-roast">
-      <div className="max-w-7xl mx-auto px-8 lg:px-16">
-
-        {/* Section label row */}
-        <div className="flex items-center gap-8 mb-24">
-          <span className="text-gold text-[10px] tracking-[0.6em] uppercase shrink-0">
-            Notre Univers
-          </span>
-          <div className="flex-1 h-px bg-divider" />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 xl:gap-32 items-center">
+    <section
+      id="apropos"
+      className="bg-cream scroll-mt-20"
+      style={{ padding: 'clamp(72px, 12vh, 150px) 0' }}
+    >
+      <div className="mx-auto" style={{ maxWidth: '1200px', padding: '0 clamp(20px, 5vw, 64px)' }}>
+        <div className="grid md:grid-cols-2 items-center" style={{ gap: 'clamp(40px, 7vw, 96px)' }}>
 
           {/* ── Text ── */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
           >
-            <h2 className="font-serif text-5xl md:text-6xl xl:text-7xl text-cream leading-[1.05] mb-10">
+            <p
+              className="flex items-center font-mono uppercase text-terra"
+              style={{ fontSize: '12px', letterSpacing: '.28em', gap: '14px', marginBottom: '26px' }}
+            >
+              <span className="inline-block h-px bg-terra" style={{ width: '30px' }} />
+              Notre univers
+            </p>
+
+            <h2
+              className="font-serif font-normal text-olive leading-[1.04]"
+              style={{ fontSize: 'clamp(38px, 5.4vw, 68px)', marginBottom: '30px' }}
+            >
               Un havre de paix<br />
-              <em className="text-gold not-italic">au cœur d&rsquo;Alger</em>
+              <em className="text-terra not-italic">au cœur d&rsquo;Alger</em>
             </h2>
 
-            <div className="space-y-5 text-walnut text-base md:text-lg leading-[1.85] max-w-lg">
+            <div
+              className="flex flex-col text-muted leading-[1.8]"
+              style={{ gap: '18px', maxWidth: '480px', fontSize: 'clamp(15px, 1.6vw, 17px)' }}
+            >
               <p>
-                Érudit Connect Lounge est bien plus qu&rsquo;un café. C&rsquo;est un espace
-                pensé pour les professionnels, les créatifs et les épicuriens qui cherchent
-                à se retrouver, travailler ou simplement savourer un moment d&rsquo;exception.
+                Érudit Coffee Shop, c&rsquo;est bien plus qu&rsquo;un café. Un lieu pensé pour les créatifs,
+                les professionnels et les épicuriens — pour se retrouver, travailler, ou simplement
+                savourer un moment d&rsquo;exception.
               </p>
               <p>
-                Décoration raffinée, cuisine savoureuse, jus naturels d&rsquo;exception et
-                un service impeccable &mdash; chaque visite devient un souvenir inoubliable.
-                Profitez aussi de notre terrasse ombragée, où une petite famille de tortues
-                vous attend.
+                Lumière douce, bambou, coussins terracotta et une cuisine généreuse. Sur la terrasse
+                ombragée, une petite famille de tortues veille tranquillement sur vos après-midis.
               </p>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-0 mt-16 pt-10 border-t border-divider">
+            <div
+              className="grid grid-cols-3"
+              style={{
+                gap: '18px',
+                marginTop: '42px',
+                paddingTop: '34px',
+                borderTop: '1px solid rgba(54,56,31,.16)',
+              }}
+            >
               {STATS.map((s, i) => (
-                <div key={i} className={i > 0 ? 'pl-8 border-l border-divider' : ''}>
-                  <div className="font-serif text-4xl xl:text-5xl text-gold leading-none mb-2">
+                <div
+                  key={i}
+                  style={i > 0 ? { paddingLeft: '18px', borderLeft: '1px solid rgba(54,56,31,.16)' } : {}}
+                >
+                  <div
+                    className="font-serif text-terra leading-none"
+                    style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}
+                  >
                     {s.value}
                   </div>
-                  <div className="text-walnut text-[11px] tracking-[0.2em] uppercase">
+                  <div
+                    className="font-mono uppercase text-quiet"
+                    style={{ fontSize: '11px', letterSpacing: '.1em', marginTop: '6px' }}
+                  >
                     {s.label}
                   </div>
                 </div>
@@ -68,35 +89,66 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* ── Image ── */}
+          {/* ── Images ── */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
             className="relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden">
+            {/* Main image */}
+            <div
+              className="relative overflow-hidden"
+              style={{
+                aspectRatio: '4/5',
+                borderRadius: '24px',
+                boxShadow: '0 30px 60px -34px rgba(54,56,31,.5)',
+              }}
+            >
               <Image
-                src="/IMG_3882.jpeg"
-                alt="Sandwich & jus naturel chez Érudit"
+                src="/IMG_3892.jpeg"
+                alt="La terrasse cosy d'Érudit"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 90vw, 45vw"
+                sizes="(max-width: 768px) 90vw, 45vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 to-transparent" />
             </div>
 
-            {/* Small accent image — desktop only */}
-            <div className="absolute -bottom-8 -left-8 w-2/5 aspect-square overflow-hidden border border-divider hidden xl:block">
+            {/* Accent image */}
+            <div
+              className="absolute overflow-hidden"
+              style={{
+                left: '-26px',
+                bottom: '-30px',
+                width: '44%',
+                aspectRatio: '1',
+                borderRadius: '18px',
+                border: '7px solid #F2EBDD',
+                boxShadow: '0 20px 40px -22px rgba(54,56,31,.5)',
+              }}
+            >
               <Image
                 src="/IMG_3884.jpeg"
-                alt="Healthy Breakfast"
+                alt="Healthy breakfast"
                 fill
                 className="object-cover"
                 sizes="20vw"
               />
             </div>
+
+            {/* Decorative circle */}
+            <div
+              className="absolute opacity-50"
+              style={{
+                right: '-14px',
+                top: '-14px',
+                width: '84px',
+                height: '84px',
+                border: '1px solid #BF6A3F',
+                borderRadius: '100px',
+              }}
+            />
           </motion.div>
 
         </div>

@@ -5,33 +5,28 @@ const WORDS = [
   'Coffee & Lounge', 'Jus Naturels', 'Brunch', 'Terrasse',
 ]
 
-function TickerRow({ reverse = false }: { reverse?: boolean }) {
-  // 4 copies ensures full coverage on any screen width
-  const content = Array(4).fill(WORDS).flat()
+export default function Ticker() {
+  const items = [...WORDS, ...WORDS]
 
   return (
-    <div className="overflow-hidden py-3" aria-hidden>
-      <div
-        className={reverse ? 'animate-ticker-right flex w-max' : 'animate-ticker flex w-max'}
-      >
-        {content.map((word, i) => (
-          <span
-            key={i}
-            className="whitespace-nowrap text-espresso text-[10px] font-bold tracking-[0.32em] uppercase px-6"
-          >
-            {word}
-            <span className="ml-6 opacity-50">·</span>
+    <div
+      className="overflow-hidden select-none"
+      style={{ background: '#36381F', padding: '17px 0' }}
+      aria-hidden
+    >
+      <div className="animate-marquee flex w-max items-center">
+        {items.map((word, i) => (
+          <span key={i} className="flex items-center shrink-0">
+            <span
+              className="font-serif italic"
+              style={{ padding: '0 30px', fontSize: 'clamp(17px, 2.2vw, 22px)', color: '#EFE7D6' }}
+            >
+              {word}
+            </span>
+            <span style={{ color: '#BF6A3F', fontSize: '13px' }}>✦</span>
           </span>
         ))}
       </div>
-    </div>
-  )
-}
-
-export default function Ticker() {
-  return (
-    <div className="bg-gold border-y border-honey/20 select-none overflow-hidden">
-      <TickerRow />
     </div>
   )
 }

@@ -22,7 +22,6 @@ const PHOTOS = [
 
 export default function Gallery() {
   const [selected, setSelected] = useState<number | null>(null)
-
   const close = useCallback(() => setSelected(null), [])
 
   useEffect(() => {
@@ -41,49 +40,66 @@ export default function Gallery() {
   }, [selected])
 
   return (
-    <section id="galerie" className="py-36 md:py-48 bg-roast">
-      <div className="max-w-7xl mx-auto px-8 lg:px-16">
+    <section
+      id="galerie"
+      className="bg-cream scroll-mt-20"
+      style={{ padding: 'clamp(72px, 12vh, 150px) 0' }}
+    >
+      <div className="mx-auto" style={{ maxWidth: '1240px', padding: '0 clamp(20px, 5vw, 64px)' }}>
 
-        {/* Section label */}
-        <div className="flex items-center gap-8 mb-24">
-          <span className="text-gold text-[10px] tracking-[0.6em] uppercase shrink-0">
-            Album
-          </span>
-          <div className="flex-1 h-px bg-divider" />
-        </div>
-
-        <motion.h2
+        {/* Header */}
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-5xl md:text-6xl xl:text-7xl text-cream mb-16"
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
+          style={{ marginBottom: 'clamp(32px, 5vh, 52px)' }}
         >
-          Galerie
-        </motion.h2>
+          <p
+            className="flex items-center font-mono uppercase text-terra"
+            style={{ fontSize: '12px', letterSpacing: '.28em', gap: '14px', marginBottom: '22px' }}
+          >
+            <span className="inline-block h-px bg-terra" style={{ width: '30px' }} />
+            Galerie
+          </p>
+          <h2
+            className="font-serif font-normal text-olive leading-none"
+            style={{ fontSize: 'clamp(40px, 6vw, 76px)' }}
+          >
+            L&rsquo;ambiance
+          </h2>
+        </motion.div>
 
-        {/* Uniform grid — 4 cols desktop, 2 mobile */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
+        {/* CSS columns masonry */}
+        <div style={{ columnWidth: 'clamp(220px, 29vw, 300px)', columnGap: '16px' }}>
           {PHOTOS.map((photo, i) => (
             <motion.div
               key={photo.src}
-              layoutId={`tile-${i}`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.04 }}
+              transition={{ duration: 0.8, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] as const }}
               onClick={() => setSelected(i)}
-              className="group relative aspect-square overflow-hidden cursor-pointer"
+              className="group relative cursor-pointer overflow-hidden"
+              style={{
+                breakInside: 'avoid',
+                marginBottom: '16px',
+                borderRadius: '16px',
+                boxShadow: '0 12px 30px -22px rgba(54,56,31,.5)',
+              }}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={photo.src}
                 alt={photo.alt}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                loading="lazy"
+                className="block w-full h-auto"
               />
-              <div className="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/30 transition-colors duration-400 flex items-end p-3">
-                <span className="text-gold text-[10px] tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-1 group-hover:translate-y-0">
+              <div
+                className="absolute left-0 right-0 bottom-0 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-[450ms]"
+                style={{ padding: '34px 18px 16px', background: 'linear-gradient(transparent, rgba(28,26,16,.72))' }}
+              >
+                <span className="font-serif italic text-[#F6F1E7]" style={{ fontSize: '19px' }}>
                   {photo.alt}
                 </span>
               </div>
@@ -92,19 +108,19 @@ export default function Gallery() {
         </div>
 
         {/* Instagram */}
-        <div className="flex items-center gap-8 mt-16">
-          <div className="flex-1 h-px bg-divider" />
+        <div className="flex items-center" style={{ gap: '22px', marginTop: 'clamp(40px, 6vh, 64px)' }}>
+          <span className="flex-1 h-px" style={{ background: 'rgba(54,56,31,.16)' }} />
           <a
             href="https://instagram.com/erudit_connect_lounge"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs tracking-[0.3em] uppercase text-walnut hover:text-gold transition-colors duration-300 shrink-0"
+            className="font-mono uppercase text-muted hover:text-terra transition-colors duration-300 whitespace-nowrap"
+            style={{ fontSize: '12px', letterSpacing: '.18em' }}
           >
             @erudit_connect_lounge
           </a>
-          <div className="flex-1 h-px bg-divider" />
+          <span className="flex-1 h-px" style={{ background: 'rgba(54,56,31,.16)' }} />
         </div>
-
       </div>
 
       {/* Lightbox */}
@@ -115,12 +131,15 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 bg-espresso/96 flex items-center justify-center"
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            style={{ background: 'rgba(22,21,16,.96)' }}
             onClick={close}
           >
-            {/* Image */}
             <motion.div
-              layoutId={`tile-${selected}`}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
               className="relative"
               style={{ width: 'min(90vw, 1000px)', height: 'min(85vh, 700px)' }}
               onClick={(e) => e.stopPropagation()}
@@ -135,27 +154,25 @@ export default function Gallery() {
               />
             </motion.div>
 
-            {/* Caption */}
             <motion.p
               key={`cap-${selected}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 font-serif italic text-sm text-gold"
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 font-serif italic text-sm text-terra"
               onClick={(e) => e.stopPropagation()}
             >
               {PHOTOS[selected].alt}
             </motion.p>
 
-            {/* Counter */}
             <span
-              className="absolute bottom-8 right-8 text-xs text-walnut tabular-nums"
+              className="absolute bottom-8 right-8 font-mono text-xs tabular-nums"
+              style={{ color: 'rgba(207,200,178,.5)' }}
               onClick={(e) => e.stopPropagation()}
             >
               {selected + 1} / {PHOTOS.length}
             </span>
 
-            {/* Arrows */}
             {[
               { dir: 'prev', icon: ChevronLeft,  pos: 'left-4',  fn: () => setSelected((s) => s !== null ? (s - 1 + PHOTOS.length) % PHOTOS.length : 0) },
               { dir: 'next', icon: ChevronRight, pos: 'right-4', fn: () => setSelected((s) => s !== null ? (s + 1) % PHOTOS.length : 0) },
@@ -163,16 +180,17 @@ export default function Gallery() {
               <button
                 key={dir}
                 onClick={(e) => { e.stopPropagation(); fn() }}
-                className={`absolute ${pos} top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-walnut hover:text-gold border border-divider hover:border-gold/40 transition-colors duration-200`}
+                className={`absolute ${pos} top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full transition-colors`}
+                style={{ color: 'rgba(207,200,178,.7)', border: '1px solid rgba(207,200,178,.2)' }}
               >
                 <Icon size={18} />
               </button>
             ))}
 
-            {/* Close */}
             <button
               onClick={close}
-              className="absolute top-6 right-6 w-9 h-9 flex items-center justify-center text-walnut hover:text-gold border border-divider hover:border-gold/40 transition-colors duration-200"
+              className="absolute top-6 right-6 w-9 h-9 flex items-center justify-center rounded-full transition-colors"
+              style={{ color: 'rgba(207,200,178,.7)', border: '1px solid rgba(207,200,178,.2)' }}
             >
               <X size={14} />
             </button>

@@ -5,7 +5,7 @@ import About from "./_components/About";
 import Menu from "./_components/Menu";
 import Gallery from "./_components/Gallery";
 import Reviews from "./_components/Reviews";
-import Reservation from "./_components/Reservation";
+import Contact from "./_components/Contact";
 import Footer from "./_components/Footer";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
         <Menu />
         <Gallery />
         <Reviews />
-        <Reservation />
+        <Contact />
       </main>
       <Footer />
     </>

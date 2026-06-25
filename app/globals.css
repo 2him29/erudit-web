@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
+@theme {
+  /* ── Brand palette ── */
+  --color-espresso: #0C0905;
+  --color-roast:    #1A1208;
+  --color-card:     #241A0E;
+  --color-gold:     #C8962E;
+  --color-honey:    #F0B23A;
+  --color-cream:    #F5F0E8;
+  --color-walnut:   #9C8265;
+  --color-divider:  #2E2214;
+
+  /* ── Typography ── */
+  --font-serif: var(--font-playfair);
+  --font-sans:  var(--font-inter);
+}
+
+/* ─── Keyframes ─────────────────────────────────────────── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes ticker-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,150,46,0); }
+  50%       { box-shadow: 0 0 24px 4px rgba(200,150,46,0.25); }
+}
+
+/* ─── Custom utilities ───────────────────────────────────── */
+.animate-ticker       { animation: ticker       32s linear infinite; }
+.animate-ticker-right { animation: ticker-right 32s linear infinite; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-pulse-gold   { animation: pulse-gold 2.5s ease-in-out infinite; }
+
+.scrollbar-hide                       { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar    { display: none; }
+
+/* ─── Design tokens (raw CSS variables) ─────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:        #0e0a06;
+  --bg-elev:   #161009;
+  --gold:      #c9a96e;
+  --gold-soft: rgba(201, 169, 110, 0.4);
+  --cream:     #f5ede0;
+  --text:      #d4c8b8;
+  --text-muted: rgba(212, 200, 184, 0.6);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0C0905;
+  color: #F5F0E8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gold scrollbar */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: #0C0905; }
+::-webkit-scrollbar-thumb { background: #C8962E; border-radius: 2px; }
+
+/* Native input dark scheme */
+input[type="date"],
+input[type="time"] { color-scheme: dark; }
+
+/* Custom select arrow */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239C8265' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.75rem !important;
+}
+
+select option {
+  background-color: #241A0E;
+  color: #F5F0E8;
 }

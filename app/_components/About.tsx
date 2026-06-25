@@ -28,10 +28,13 @@ export default function About() {
           >
             <p
               className="flex items-center font-mono uppercase text-terra"
-              style={{ fontSize: '12px', letterSpacing: '.28em', gap: '14px', marginBottom: '26px' }}
+              style={{ fontSize: '12px', letterSpacing: '.28em', gap: '12px', marginBottom: '26px' }}
             >
-              <span className="inline-block h-px bg-terra" style={{ width: '30px' }} />
-              Notre univers
+              <span className="flex items-center" style={{ gap: '4px' }}>
+                <span className="inline-block h-px bg-terra" style={{ width: '16px' }} />
+                <span className="inline-block h-px bg-terra" style={{ width: '16px' }} />
+              </span>
+              Notre Univers
             </p>
 
             <h2
@@ -130,11 +133,23 @@ export default function About() {
             >
               <Image
                 src="/IMG_3884.jpeg"
-                alt="Healthy breakfast"
+                alt="Healthy Breakfast"
                 fill
                 className="object-cover"
                 sizes="20vw"
               />
+              {/* Caption overlay */}
+              <div
+                className="absolute bottom-0 left-0 right-0"
+                style={{ padding: '28px 14px 14px', background: 'linear-gradient(transparent, rgba(54,56,31,.65))' }}
+              >
+                <span
+                  className="font-serif text-[#F6F1E7] leading-[1.2] block"
+                  style={{ fontSize: '13px' }}
+                >
+                  Healthy<br />Breakfast
+                </span>
+              </div>
             </div>
 
             {/* Decorative circle */}

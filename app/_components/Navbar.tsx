@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
 const NAV_LINKS = [
-  { href: '#apropos', label: 'Notre univers' },
   { href: '#menu',    label: 'Menu' },
   { href: '#galerie', label: 'Galerie' },
   { href: '#avis',    label: 'Avis' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#contact', label: 'Nous Trouver' },
 ]
 
 export default function Navbar() {
@@ -35,29 +34,51 @@ export default function Navbar() {
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-cream/95 backdrop-blur-md border-b border-olive/10 shadow-sm'
-            : 'bg-transparent'
+            ? 'bg-cream/98 backdrop-blur-md shadow-sm'
+            : 'bg-cream/95 backdrop-blur-sm'
         }`}
+        style={{ borderBottom: '1px solid rgba(54,56,31,.1)' }}
       >
         <nav
           className="mx-auto flex items-center justify-between"
-          style={{ maxWidth: '1200px', padding: '0 clamp(20px, 5vw, 64px)', height: '76px' }}
+          style={{ maxWidth: '1400px', padding: '0 clamp(24px, 4vw, 56px)', height: '68px' }}
         >
-          {/* Wordmark */}
-          <Link
-            href="/"
-            className="font-serif text-[26px] tracking-[.22em] text-olive leading-none"
-          >
-            ÉRUDIT
+          {/* Logo: ÉRUDIT | COFFEE SHOP */}
+          <Link href="/" className="flex items-center shrink-0" style={{ gap: '14px' }}>
+            <span
+              className="font-serif text-olive"
+              style={{ fontSize: '26px', letterSpacing: '.06em', lineHeight: 1 }}
+            >
+              ÉRUDIT
+            </span>
+            <span
+              className="block bg-olive/25"
+              style={{ width: '1px', height: '28px' }}
+            />
+            <span
+              className="font-mono uppercase text-olive/55 leading-[1.35]"
+              style={{ fontSize: '9px', letterSpacing: '.22em' }}
+            >
+              COFFEE<br />SHOP
+            </span>
           </Link>
 
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-9">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+          {/* Desktop nav — pipe separated */}
+          <ul className="hidden md:flex items-center">
+            {NAV_LINKS.map((link, i) => (
+              <li key={link.href} className="flex items-center">
+                {i > 0 && (
+                  <span
+                    className="text-olive/30 font-mono select-none"
+                    style={{ fontSize: '12px', margin: '0 20px' }}
+                  >
+                    |
+                  </span>
+                )}
                 <Link
                   href={link.href}
-                  className="font-mono text-[11px] tracking-[.16em] uppercase text-muted hover:text-olive transition-colors duration-300"
+                  className="font-mono uppercase text-muted hover:text-olive transition-colors duration-300"
+                  style={{ fontSize: '11px', letterSpacing: '.18em' }}
                 >
                   {link.label}
                 </Link>
@@ -69,14 +90,20 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <Link
               href="#contact"
-              className="hidden md:inline-flex font-mono text-[11px] tracking-[.16em] uppercase px-8 py-3.5 rounded-full border border-olive/40 text-olive hover:bg-olive hover:text-cream transition-all duration-300"
+              className="hidden md:inline-flex font-mono uppercase text-olive hover:bg-olive hover:text-cream transition-all duration-300"
+              style={{
+                fontSize: '11px',
+                letterSpacing: '.2em',
+                padding: '10px 22px',
+                border: '1px solid rgba(54,56,31,.45)',
+              }}
             >
-              Réserver une table
+              Réserver
             </Link>
 
             <button
               onClick={() => setOpen(!open)}
-              className="md:hidden w-10 h-10 rounded-full border border-olive/30 flex items-center justify-center text-olive hover:bg-olive/5 transition-colors"
+              className="md:hidden w-10 h-10 flex items-center justify-center text-olive border border-olive/25 rounded-full hover:bg-olive/5 transition-colors"
               aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
               {open ? (
@@ -123,7 +150,6 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,9 +160,10 @@ export default function Navbar() {
               <Link
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="inline-flex bg-olive text-cream font-mono text-[11px] tracking-[.16em] uppercase px-10 py-4 rounded-full transition-colors hover:bg-olive/90"
+                className="inline-flex font-mono uppercase text-olive border border-olive/45 px-10 py-4 transition-colors hover:bg-olive hover:text-cream"
+                style={{ fontSize: '11px', letterSpacing: '.2em' }}
               >
-                Réserver une table
+                Réserver
               </Link>
             </motion.div>
           </motion.div>
